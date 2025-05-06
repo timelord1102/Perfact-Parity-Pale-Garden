@@ -1,0 +1,23 @@
+// 1.21.1	2025-05-05T05:23:52.3176664	Perfect Parity Pale Garden Edition/Tags for minecraft:block
+d0a10a63588c7ca29fbcfdc321f35841535d32a1 data\minecraft\tags\block\pale_oak_logs.json
+c7d3df133859a350e98cf23cd3a4fd543e52d89d data\minecraft\tags\block\wooden_slabs.json
+dcb6581728d4869d9aa64e5da726d498e9581c69 data\minecraft\tags\block\wooden_doors.json
+e6bb34febd917f6e8a31fd8def98c9b6d1f65f96 data\minecraft\tags\block\walls.json
+3ebcf2a87ce9f9e66989cb3303e57f107ea950b8 data\minecraft\tags\block\wooden_trapdoors.json
+049902a929705bb5d76db9f70cf0ed8b371b8129 data\minecraft\tags\block\wooden_stairs.json
+c15ffea74d321bea9ef958ba6efda98d1b37d7bf data\minecraft\tags\block\logs_that_burn.json
+72bdaa3ad16eaf8ae5bf45c6d60b4882342d9db2 data\minecraft\tags\block\leaves.json
+a87317def0b679ba2ab6d2e6697a652794dcc8f9 data\minecraft\tags\block\planks.json
+9006a4d6edcccb3cd258872594d992d1c1d1fca6 data\minecraft\tags\block\wall_signs.json
+e59f5d481a86a2e557137a0b826f9bc7e77e6dcf data\minecraft\tags\block\slabs.json
+30930a712e53731126a1c8bf5363ef2587c0f8ae data\minecraft\tags\block\saplings.json
+02c0f4714cd74219a025937cdb943567e8209207 data\minecraft\tags\block\standing_signs.json
+b3e2b3cd595737ea533dc8ba0d87a04504e7833a data\minecraft\tags\block\wall_hanging_signs.json
+168f825eb904049ccc882fb6ec63141997a678d3 data\minecraft\tags\block\combination_step_sound_blocks.json
+6a3d37ffadb03a6bd2530464e779724bca8fb681 data\minecraft\tags\block\stairs.json
+c6dee40f618f0d1cda2682b4ab0d567579cee9cd data\minecraft\tags\block\fence_gates.json
+6c6c43c608d278726783c89d1eac02f8abf6a027 data\minecraft\tags\block\wooden_buttons.json
+ae6c5b644a88cc7181fb505e499f8dfb801ba7bd data\minecraft\tags\block\wooden_fences.json
+fb79626fbcd14f27dbf43b1c1b395f11459aa238 data\minecraft\tags\block\ceiling_hanging_signs.json
+d4df969f1ed533102974b86b0510cbfadb946bea data\minecraft\tags\block\wooden_pressure_plates.json
+455125668671dda345c84bc26ce2850b12cb59c0 data\minecraft\tags\block\mineable\pickaxe.json
