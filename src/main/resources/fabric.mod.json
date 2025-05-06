@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "perfect-parity-pg",
+	"version": "${version}",
+	"name": "Perfect Parity Pale Garden Edition",
+	"description": "A near 1:1 backport of 1.21.4",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/perfect-parity-pg/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.perfectparitypg.PerfectParityPG"
+		],
+		"client": [
+			"com.perfectparitypg.PerfectParityPGClient"
+		],
+		"fabric-datagen": [
+			"com.perfectparitypg.PerfectParityPGDataGenerator"
+		]
+	},
+	"mixins": [
+		"perfect-parity.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.14",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
