@@ -1,0 +1,80 @@
+{
+  "block.resin.break": {
+    "sounds": [
+      "block/resin/resin_break1",
+      "block/resin/resin_break2",
+      "block/resin/resin_break3",
+      "block/resin/resin_break4",
+      "block/resin/resin_break5"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.resin.fall": {
+    "sounds": [
+      "block/resin/resin_fall"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.resin.place": {
+    "sounds": [
+      "block/resin/resin_place1",
+      "block/resin/resin_place2",
+      "block/resin/resin_place3",
+      "block/resin/resin_place4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.resin.step": {
+    "sounds": [
+      "block/resin/resin_step1",
+      "block/resin/resin_step2",
+      "block/resin/resin_step3",
+      "block/resin/resin_step4",
+      "block/resin/resin_step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+
+  "block.resin_bricks.break": {
+    "sounds": [
+      "block/resin_bricks/resin_brick_break"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.resin_bricks.fall": {
+    "sounds": [
+      "block/resin_bricks/resin_brick_fall"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.resin_bricks.hit": {
+    "sounds": [
+      "block/resin_bricks/resin_brick_hit1",
+      "block/resin_bricks/resin_brick_hit2",
+      "block/resin_bricks/resin_brick_hit3",
+      "block/resin_bricks/resin_brick_hit4",
+      "block/resin_bricks/resin_brick_hit5"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.resin_bricks.place": {
+    "sounds": [
+      "block/resin_bricks/resin_brick_place1",
+      "block/resin_bricks/resin_brick_place2",
+      "block/resin_bricks/resin_brick_place3",
+      "block/resin_bricks/resin_brick_place4",
+      "block/resin_bricks/resin_brick_place5"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.resin_bricks.step": {
+    "sounds": [
+      "block/resin_bricks/resin_brick_step1",
+      "block/resin_bricks/resin_brick_step2",
+      "block/resin_bricks/resin_brick_step3",
+      "block/resin_bricks/resin_brick_step4",
+      "block/resin_bricks/resin_brick_step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  }
+}
