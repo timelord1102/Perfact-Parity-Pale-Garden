@@ -88,7 +88,7 @@ public class ModBlocks {
         PALE_OAK_FENCE = register("pale_oak_fence", new FenceBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(SoundType.WOOD)), true);
         PALE_OAK_DOOR = register("pale_oak_door", new DoorBlock(ModBlockSetTypes.PALE_OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY)), true);
 
-        CREAKING_HEART = register("creaking_heart", new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F)/*.sound(SoundType.CREAKING_HEART*/), true);
+        CREAKING_HEART = register("creaking_heart", new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)), true);
     }
 
     private static ResourceLocation blockId(String string) {

@@ -20,9 +20,31 @@ public class ModSounds {
     public static final SoundEvent RESIN_BRICKS_PLACE = registerSoundEvent("block.resin_bricks.place");
     public static final SoundEvent RESIN_BRICKS_STEP = registerSoundEvent("block.resin_bricks.step");
 
+    public static final SoundEvent CREAKING_HEART_BREAK = registerSoundEvent("block.creaking_heart.break");
+    public static final SoundEvent CREAKING_HEART_FALL = registerSoundEvent("block.creaking_heart.fall");
+    public static final SoundEvent CREAKING_HEART_HIT = registerSoundEvent("block.creaking_heart.hit");
+    public static final SoundEvent CREAKING_HEART_HURT = registerSoundEvent("block.creaking_heart.hurt");
+    public static final SoundEvent CREAKING_HEART_PLACE = registerSoundEvent("block.creaking_heart.place");
+    public static final SoundEvent CREAKING_HEART_STEP = registerSoundEvent("block.creaking_heart.step");
+    public static final SoundEvent CREAKING_HEART_IDLE = registerSoundEvent("block.creaking_heart.idle");
+    public static final SoundEvent CREAKING_HEART_SPAWN = registerSoundEvent("block.creaking_heart.spawn");
+
+    public static final SoundEvent CREAKING_AMBIENT = registerSoundEvent("entity.creaking.ambient");
+    public static final SoundEvent CREAKING_ACTIVATE = registerSoundEvent("entity.creaking.activate");
+    public static final SoundEvent CREAKING_DEACTIVATE = registerSoundEvent("entity.creaking.deactivate");
+    public static final SoundEvent CREAKING_ATTACK = registerSoundEvent("entity.creaking.attack");
+    public static final SoundEvent CREAKING_DEATH = registerSoundEvent("entity.creaking.death");
+    public static final SoundEvent CREAKING_STEP = registerSoundEvent("entity.creaking.step");
+    public static final SoundEvent CREAKING_FREEZE = registerSoundEvent("entity.creaking.freeze");
+    public static final SoundEvent CREAKING_UNFREEZE = registerSoundEvent("entity.creaking.unfreeze");
+    public static final SoundEvent CREAKING_SPAWN = registerSoundEvent("entity.creaking.spawn");
+    public static final SoundEvent CREAKING_SWAY = registerSoundEvent("entity.creaking.sway");
+    public static final SoundEvent CREAKING_TWITCH = registerSoundEvent("entity.creaking.twitch");
+
+
     public static final SoundType RESIN = new SoundType(1.0F, 1.0F, RESIN_BREAK, RESIN_STEP, RESIN_PLACE, SoundEvents.EMPTY, RESIN_FALL);
     public static final SoundType RESIN_BRICKS = new SoundType(1.0F, 1.0F, ModSounds.RESIN_BRICKS_BREAK, ModSounds.RESIN_BRICKS_STEP, ModSounds.RESIN_BRICKS_PLACE, ModSounds.RESIN_BRICKS_HIT, ModSounds.RESIN_BRICKS_FALL);
-
+    public static final SoundType CREAKING_HEART = new SoundType(1.0F, 1.0F, ModSounds.CREAKING_HEART_BREAK, ModSounds.CREAKING_HEART_STEP, ModSounds.CREAKING_HEART_PLACE, ModSounds.CREAKING_HEART_HIT, ModSounds.CREAKING_HEART_FALL);
 
     private static SoundEvent registerSoundEvent(String name) {
         ResourceLocation resourceLocation = ResourceLocation.tryBuild(ResourceLocation.DEFAULT_NAMESPACE, name);

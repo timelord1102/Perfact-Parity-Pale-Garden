@@ -2,9 +2,11 @@ package com.perfectparitypg.world.level.block;
 
 import com.mojang.serialization.MapCodec;
 import com.perfectparitypg.datagen.ModBlockTagProvider;
+import com.perfectparitypg.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -76,7 +78,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         if (isNaturalNight(level)) {
             if ((Boolean)blockState.getValue(ACTIVE)) {
                 if (randomSource.nextInt(16) == 0 && isSurroundedByLogs(level, blockPos)) {
-                   // level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), SoundEvents.CREAKING_HEART_IDLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                   level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
                 }
 
             }
@@ -114,6 +116,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         }
 
         for(Direction direction : directions) {
+            System.out.println(String.valueOf(blockPos.relative(direction)) + "0");
             System.out.println(String.valueOf(blockPos.relative(direction)) + "0");
             BlockState blockState2 = levelAccessor.getBlockState(blockPos.relative(direction));
             if (!blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.getValue(AXIS) != axis) {

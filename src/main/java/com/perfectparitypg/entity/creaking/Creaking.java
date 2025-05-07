@@ -2,6 +2,7 @@ package com.perfectparitypg.entity.creaking;
 
 import com.mojang.serialization.Dynamic;
 import com.perfectparitypg.PerfectParityPG;
+import com.perfectparitypg.sound.ModSounds;
 import com.perfectparitypg.world.level.block.CreakingHeartBlock;
 import com.perfectparitypg.world.level.block.CreakingHeartBlockEntity;
 import com.perfectparitypg.world.level.block.ModBlocks;
@@ -16,6 +17,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -222,13 +225,16 @@ public class Creaking extends Monster {
         }
 
         if (!this.level().isClientSide) {
-            boolean bl = (Boolean)this.entityData.get(CAN_MOVE);
+            boolean bl = this.entityData.get(CAN_MOVE);
             boolean bl2 = this.checkCanMove();
             if (bl2 != bl) {
                 this.gameEvent(GameEvent.ENTITY_ACTION);
                 if (bl2) {
+                    this.makeSound(ModSounds.CREAKING_UNFREEZE);
                 } else {
                     this.stopInPlace();
+                    this.makeSound(ModSounds.CREAKING_FREEZE);
+
                 }
             }
 
@@ -320,7 +326,7 @@ public class Creaking extends Monster {
     public void creakingDeathEffects(DamageSource damageSource) {
         this.blameSourceForDamage(damageSource);
         // this.die(damageSource);
-        // this.makeSound(SoundEvents.CREAKING_TWITCH);
+        this.makeSound(ModSounds.CREAKING_TWITCH);
     }
 
     @Override
@@ -328,6 +334,7 @@ public class Creaking extends Monster {
         if (b == 66) {
             this.invulnerabilityAnimationRemainingTicks = 8;
             this.playHurtSound(this.damageSources().generic());
+            this.playAmbientSound();
         } else if (b == 4) {
             this.attackAnimationRemainingTicks = 15;
             this.playAttackSound();
@@ -439,22 +446,21 @@ public class Creaking extends Monster {
 
     }
 
-    /* public void playAttackSound() {
-        this.makeSound(SoundEvents.CREAKING_ATTACK);
+    public void playAttackSound() {
+        this.makeSound(ModSounds.CREAKING_ATTACK);
     }
     protected SoundEvent getAmbientSound() {
-        return this.isActive() ? null : SoundEvents.CREAKING_AMBIENT;
+        return this.isActive() ? null : ModSounds.CREAKING_AMBIENT;
     }
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return this.isHeartBound() ? SoundEvents.CREAKING_SWAY : super.getHurtSound(damageSource);
+        return this.isHeartBound() ? ModSounds.CREAKING_SWAY : super.getHurtSound(damageSource);
     }
     protected SoundEvent getDeathSound() {
-        return SoundEvents.CREAKING_DEATH;
+        return ModSounds.CREAKING_DEATH;
     }
     protected void playStepSound(BlockPos blockPos, BlockState blockState) {
-        this.playSound(SoundEvents.CREAKING_STEP, 0.15F, 1.0F);
+        this.playSound(ModSounds.CREAKING_STEP, 0.15F, 1.0F);
     }
-     */
 
     @Nullable
     @Override
@@ -512,14 +518,14 @@ public class Creaking extends Monster {
     public void activate(Player player) {
         this.getBrain().setMemory(MemoryModuleType.ATTACK_TARGET, player);
         this.gameEvent(GameEvent.ENTITY_ACTION);
-        // this.makeSound(SoundEvents.CREAKING_ACTIVATE);
+        this.makeSound(ModSounds.CREAKING_ACTIVATE);
         this.setIsActive(true);
     }
 
     public void deactivate() {
         this.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
         this.gameEvent(GameEvent.ENTITY_ACTION);
-        // this.makeSound(SoundEvents.CREAKING_DEACTIVATE);
+        this.makeSound(ModSounds.CREAKING_DEACTIVATE);
         this.setIsActive(false);
     }
 

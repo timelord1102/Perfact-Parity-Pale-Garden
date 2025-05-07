@@ -6,6 +6,7 @@ import com.perfectparitypg.datagen.ModBlockTagProvider;
 import com.perfectparitypg.entity.ModEntities;
 import com.perfectparitypg.entity.creaking.Creaking;
 import com.perfectparitypg.particle.TrailParticleOption;
+import com.perfectparitypg.sound.ModSounds;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +14,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.SpawnUtil;
 import net.minecraft.world.Difficulty;
@@ -90,7 +92,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     Vec3 vec32 = vec3.subtract(creakingHeartBlockEntity.emitterTarget).scale((double)f).add(creakingHeartBlockEntity.emitterTarget);
                     BlockPos blockPos2 = BlockPos.containing(vec32);
                     float g = (float)creakingHeartBlockEntity.emitter / 2.0F / 100.0F + 0.5F;
-                    // serverLevel.playSound((Player)null, blockPos2, SoundEvents.CREAKING_HEART_HURT, SoundSource.BLOCKS, g, 1.0F);
+                    serverLevel.playSound((Player)null, blockPos2, ModSounds.CREAKING_HEART_HURT, SoundSource.BLOCKS, g, 1.0F);
                 }
 
                 --creakingHeartBlockEntity.emitter;
@@ -110,8 +112,8 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                                         Creaking creaking = spawnProtector(serverLevel, creakingHeartBlockEntity);
                                         if (creaking != null) {
                                             creakingHeartBlockEntity.setCreakingInfo(creaking);
-                                            // creaking.makeSound(SoundEvents.CREAKING_SPAWN);
-                                            // level.playSound((Player)null, creakingHeartBlockEntity.getBlockPos(), SoundEvents.CREAKING_HEART_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                            creaking.makeSound(ModSounds.CREAKING_SPAWN);
+                                            level.playSound((Player)null, creakingHeartBlockEntity.getBlockPos(), ModSounds.CREAKING_HEART_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
                                         }
                                     }
 
@@ -229,7 +231,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
                     for(int j = 0; j < rand; ++j) {
                         this.spreadResin().ifPresent((blockPos) -> {
-                            // this.level.playSound((Player)null, blockPos, SoundEvents.RESIN_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                            this.level.playSound((Player)null, blockPos, ModSounds.RESIN_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
                             this.level.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(this.level.getBlockState(blockPos)));
                         });
                     }
