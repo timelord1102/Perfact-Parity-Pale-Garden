@@ -14,10 +14,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -55,12 +52,17 @@ public class CreakingHeartBlock extends BaseEntityBlock {
     }
 
     @Override
+    public @NotNull RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
         if (level.isClientSide) {
             return null;
         } else {
-            return (Boolean)blockState.getValue(ACTIVE) ? createTickerHelper(blockEntityType, ModBlockUtils.CREAKING_HEART, CreakingHeartBlockEntity::serverTick) : null;
+            return (Boolean)blockState.getValue(ACTIVE) ? createTickerHelper(blockEntityType, ModBlockEntities.CREAKING_HEART, CreakingHeartBlockEntity::serverTick) : null;
         }
     }
 
@@ -96,11 +98,31 @@ public class CreakingHeartBlock extends BaseEntityBlock {
     public static boolean hasRequiredLogs(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
         Direction.Axis axis = blockState.getValue(AXIS);
 
-        for(Direction direction : axis.getPlane().stream().toList()) {
+        Direction[] directions;
+        switch (axis) {
+            case X:
+                directions = new Direction[]{Direction.EAST, Direction.WEST};
+                break;
+            case Y:
+                directions = new Direction[]{Direction.UP, Direction.DOWN};
+                break;
+            case Z:
+                directions = new Direction[]{Direction.SOUTH, Direction.NORTH};
+                break;
+            default:
+                throw new IllegalStateException("Invalid axis: " + axis);
+        }
+
+        for(Direction direction : directions) {
+            System.out.println(String.valueOf(blockPos.relative(direction)) + "0");
             BlockState blockState2 = levelAccessor.getBlockState(blockPos.relative(direction));
             if (!blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.getValue(AXIS) != axis) {
+                if (blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS)) {
+                    System.out.println(String.valueOf(blockState2.getValue(AXIS)) + "1");
+                }
                 return false;
             }
+            System.out.println(String.valueOf(blockState2.getValue(AXIS)) + "2");
         }
 
         return true;
@@ -194,7 +216,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
 
     static {
         AXIS = BlockStateProperties.AXIS;
-        ACTIVE = BlockStateProperties.ENABLED;
-        NATURAL = BlockStateProperties.ATTACHED;
+        ACTIVE = BooleanProperty.create("active");
+        NATURAL = BooleanProperty.create("natural");
     }
 }

@@ -1,9 +1,11 @@
 package com.perfectparitypg.world.level.block;
 
 import com.mojang.datafixers.util.Either;
+import com.perfectparitypg.PerfectParityPG;
 import com.perfectparitypg.datagen.ModBlockTagProvider;
 import com.perfectparitypg.entity.ModEntities;
 import com.perfectparitypg.entity.creaking.Creaking;
+import com.perfectparitypg.particle.TrailParticleOption;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -63,7 +65,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     private int outputSignal;
 
     public CreakingHeartBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockUtils.CREAKING_HEART, blockPos, blockState);
+        super(ModBlockEntities.CREAKING_HEART, blockPos, blockState);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, CreakingHeartBlockEntity creakingHeartBlockEntity) {
@@ -289,9 +291,9 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     vec3 = vec32;
                     vec32 = vec33;
                 }
+                TrailParticleOption trailParticleOption = new TrailParticleOption(vec32, k, randomSource.nextInt(40) + 10);
+                serverLevel.sendParticles(trailParticleOption, vec3.x, vec3.y, vec3.z, 1, (double)0.0F, (double)0.0F, (double)0.0F, (double)0.0F);
 
-                // TrailParticleOption trailParticleOption = new TrailParticleOption(vec32, k, randomSource.nextInt(40) + 10);
-                // serverLevel.sendParticles(trailParticleOption, true, true, vec3.x, vec3.y, vec3.z, 1, (double)0.0F, (double)0.0F, (double)0.0F, (double)0.0F);
             }
 
         }
@@ -299,13 +301,13 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
     public void removeProtector(@Nullable DamageSource damageSource) {
         Object var3 = this.getCreakingProtector().orElse((Creaking) null);
+        PerfectParityPG.LOGGER.info(String.valueOf(damageSource));
         if (var3 instanceof Creaking creaking) {
             if (damageSource == null) {
                 creaking.tearDown();
             } else {
                 creaking.creakingDeathEffects(damageSource);
                 creaking.setTearingDown();
-                creaking.setHealth(0.0F);
             }
 
             this.clearCreakingInfo();

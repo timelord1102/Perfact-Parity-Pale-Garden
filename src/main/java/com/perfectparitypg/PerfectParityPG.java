@@ -7,7 +7,7 @@ import com.perfectparitypg.utils.ModifyLootTables;
 import com.perfectparitypg.world.entity.ModBoats;
 import com.perfectparitypg.world.item.ModItems;
 import com.perfectparitypg.world.level.block.ModBlockFamilies;
-import com.perfectparitypg.world.level.block.ModBlockUtils;
+import com.perfectparitypg.world.level.block.ModBlockEntities;
 import com.perfectparitypg.world.level.block.ModBlocks;
 import net.fabricmc.api.ModInitializer;
 
@@ -35,7 +35,7 @@ public class PerfectParityPG implements ModInitializer {
 		ModBlockFamilies.createBlockFamilies();
 		ModBoats.registerBoats();
 		ModEntities.registerModEntities();
-		ModBlockUtils.registerBlockEntities();
+		ModBlockEntities.registerBlockEntities();
 		ModParticles.registerParticles();
 
 		LOGGER.info("1.21.4 Features Added!");

@@ -4,11 +4,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-public class ModBlockUtils {
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-    public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
+public class ModBlockEntities {
 
     public static final BlockEntityType<CreakingHeartBlockEntity> CREAKING_HEART;
 
@@ -22,6 +19,5 @@ public class ModBlockUtils {
 
     static {
         CREAKING_HEART = register("creaking_heart", BlockEntityType.Builder.of(CreakingHeartBlockEntity::new, ModBlocks.CREAKING_HEART).build());
-
     }
 }

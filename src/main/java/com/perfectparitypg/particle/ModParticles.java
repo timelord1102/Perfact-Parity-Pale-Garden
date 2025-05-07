@@ -17,6 +17,8 @@ import java.util.function.Function;
 public class ModParticles {
     public static final SimpleParticleType PALE_OAK_LEAVES = registerParticle("pale_oak_leaves", FabricParticleTypes.simple(false));
     public static final ParticleType<BlockParticleOption> BLOCK_CRUMBLE = registerParticle("block_crumble", false, BlockParticleOption::codec, BlockParticleOption::streamCodec);
+    public static final ParticleType<TrailParticleOption> TRAIL = registerParticle("trail", false, (particleType) -> TrailParticleOption.CODEC, (particleType) -> TrailParticleOption.STREAM_CODEC);
+
 
     private static SimpleParticleType registerParticle(String name, SimpleParticleType particleType) {
         return Registry.register(BuiltInRegistries.PARTICLE_TYPE, ResourceLocation.tryBuild(ResourceLocation.DEFAULT_NAMESPACE, name), particleType);
@@ -28,7 +30,7 @@ public class ModParticles {
             Function<ParticleType<T>, MapCodec<T>> function,
             Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> function2
     ) {
-        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, string, new ParticleType<T>(bl) {
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE,  ResourceLocation.tryBuild(ResourceLocation.DEFAULT_NAMESPACE, string), new ParticleType<T>(bl) {
             @Override
             public MapCodec<T> codec() {
                 return (MapCodec<T>)function.apply(this);

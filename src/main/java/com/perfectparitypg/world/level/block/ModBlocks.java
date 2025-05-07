@@ -5,7 +5,6 @@ import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -106,10 +105,6 @@ public class ModBlocks {
 
     private static Block legacyStair(Block block) {
         return new StairBlock(block.defaultBlockState(), BlockBehaviour.Properties.ofLegacyCopy(block));
-    }
-
-    public static BlockBehaviour.Properties logProperties(MapColor mapColor, MapColor mapColor2, SoundType soundType) {
-        return BlockBehaviour.Properties.of().mapColor((blockState) -> blockState.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? mapColor : mapColor2).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(soundType).ignitedByLava();
     }
 
 
