@@ -58,12 +58,12 @@ public class CreakingModel<T extends Creaking> extends HierarchicalModel<T> {
         }
 
         this.animate(creaking.attackAnimationState, CreakingAnimation.CREAKING_ATTACK, creaking.tickCount);
-        this.animate(creaking.invulnerabilityAnimationState, CreakingAnimation.CREAKING_INVULNERABLE, creaking.getAgeScale());
-        this.animate(creaking.deathAnimationState, CreakingAnimation.CREAKING_DEATH, creaking.getAgeScale());
+        this.animate(creaking.invulnerabilityAnimationState, CreakingAnimation.CREAKING_INVULNERABLE, creaking.tickCount);
+        this.animate(creaking.deathAnimationState, CreakingAnimation.CREAKING_DEATH, creaking.tickCount);
     }
 
     private void animateHeadLookTarget(float f, float g) {
-        this.head.xRot = g * ((float)Math.PI / 180F) * -1;
+        this.head.xRot = g * ((float)Math.PI / 180F);
         this.head.yRot = f * ((float)Math.PI / 180F);
     }
 

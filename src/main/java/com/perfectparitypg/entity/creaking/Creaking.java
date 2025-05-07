@@ -1,13 +1,14 @@
 package com.perfectparitypg.entity.creaking;
 
 import com.mojang.serialization.Dynamic;
-import com.perfectparitypg.particle.ModParticles;
+import com.perfectparitypg.PerfectParityPG;
 import com.perfectparitypg.world.level.block.CreakingHeartBlock;
 import com.perfectparitypg.world.level.block.CreakingHeartBlockEntity;
 import com.perfectparitypg.world.level.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.game.DebugPackets;
@@ -92,6 +93,7 @@ public class Creaking extends Monster {
         GroundPathNavigation groundPathNavigation = (GroundPathNavigation)this.getNavigation();
         groundPathNavigation.setCanFloat(true);
         this.xpReward = 0;
+        this.nextFlickerTime = 0;
         this.setInvulnerable(true);
     }
 
@@ -151,7 +153,7 @@ public class Creaking extends Monster {
     public boolean hurt(DamageSource damageSource, float f) {
         BlockPos blockPos = this.getHomePos();
         if (blockPos != null && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-            if (!this.isInvulnerableTo(damageSource) && this.invulnerabilityAnimationRemainingTicks <= 0 && !this.isDeadOrDying()) {
+            if (this.invulnerabilityAnimationRemainingTicks <= 0 && !this.isDeadOrDying()) {
                 Player player = this.blameSourceForDamage(damageSource);
                 Entity entity = damageSource.getDirectEntity();
                 if (!(entity instanceof LivingEntity) && !(entity instanceof Projectile) && player == null) {
@@ -159,8 +161,9 @@ public class Creaking extends Monster {
                 } else {
                     this.invulnerabilityAnimationRemainingTicks = 8;
                     this.level().broadcastEntityEvent(this, (byte)66);
+                    PerfectParityPG.LOGGER.info(String.valueOf(invulnerabilityAnimationRemainingTicks));
                     BlockEntity var8 = this.level().getBlockEntity(blockPos);
-                   if (var8 instanceof CreakingHeartBlockEntity) {
+                    if (var8 instanceof CreakingHeartBlockEntity) {
                         CreakingHeartBlockEntity creakingHeartBlockEntity = (CreakingHeartBlockEntity)var8;
                         if (creakingHeartBlockEntity.isProtector(this)) {
                             if (player != null) {
@@ -256,7 +259,8 @@ public class Creaking extends Monster {
 
                 boolean bl = var10000;
                 if (!bl) {
-                    this.setHealth(0.0F);
+                    this.setTearingDown();
+                    this.tickDeath();
                 }
             }
         }
@@ -264,7 +268,6 @@ public class Creaking extends Monster {
         super.tick();
         if (this.level().isClientSide) {
             this.setupAnimationStates();
-            this.checkEyeBlink();
         }
 
     }
@@ -272,9 +275,12 @@ public class Creaking extends Monster {
     @Override
     protected void tickDeath() {
         if (this.isHeartBound() && this.isTearingDown()) {
+
             ++this.deathTime;
+            checkEyeBlink();
             if (!this.level().isClientSide() && this.deathTime > 45 && !this.isRemoved()) {
                 this.tearDown();
+                System.out.println("death");
             }
         } else {
             super.tickDeath();
@@ -295,7 +301,6 @@ public class Creaking extends Monster {
         this.deathAnimationState.animateWhen(this.isTearingDown(), this.tickCount);
     }
 
-
     public void tearDown() {
         Level aABB = this.level();
         if (aABB instanceof ServerLevel serverLevel) {
@@ -304,8 +309,8 @@ public class Creaking extends Monster {
             double d = aABB2.getXsize() * 0.3;
             double e = aABB2.getYsize() * 0.3;
             double f = aABB2.getZsize() * 0.3;
-            serverLevel.sendParticles(new BlockParticleOption(ModParticles.BLOCK_CRUMBLE, ModBlocks.PALE_OAK_WOOD.defaultBlockState()), vec3.x, vec3.y, vec3.z, 100, d, e, f, (double)0.0F);
-            serverLevel.sendParticles(new BlockParticleOption(ModParticles.BLOCK_CRUMBLE, (BlockState)ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true)), vec3.x, vec3.y, vec3.z, 10, d, e, f, (double)0.0F);
+            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.PALE_OAK_WOOD.defaultBlockState()), vec3.x, vec3.y, vec3.z, 100, d, e, f, (double)0.0F);
+            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, (BlockState)ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true)), vec3.x, vec3.y, vec3.z, 10, d, e, f, (double)0.0F);
         }
 
         this.makeSound(this.getDeathSound());
@@ -314,7 +319,7 @@ public class Creaking extends Monster {
 
     public void creakingDeathEffects(DamageSource damageSource) {
         this.blameSourceForDamage(damageSource);
-        this.die(damageSource);
+        // this.die(damageSource);
         // this.makeSound(SoundEvents.CREAKING_TWITCH);
     }
 
@@ -426,9 +431,10 @@ public class Creaking extends Monster {
     }
 
     public void checkEyeBlink() {
+        System.out.println(String.valueOf(this.deathTime > this.nextFlickerTime));
         if (this.deathTime > this.nextFlickerTime) {
             this.nextFlickerTime = this.deathTime + this.getRandom().nextIntBetweenInclusive(this.eyesGlowing ? 2 : this.deathTime / 4, this.eyesGlowing ? 8 : this.deathTime / 2);
-            this.eyesGlowing = !this.eyesGlowing;
+            this.setIsActive(!this.isActive());
         }
 
     }
@@ -471,6 +477,9 @@ public class Creaking extends Monster {
     }
 
     public boolean checkCanMove() {
+        if (isTearingDown()) {
+            return false;
+        }
         List<Player> players = getNearestPlayers();
         boolean bl = this.isActive();
         // No players nearby → always move
