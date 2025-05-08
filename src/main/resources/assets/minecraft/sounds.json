@@ -234,5 +234,68 @@
       "mob/creaking/creaking_unfreeze3"
     ],
     "subtitle": "subtitles.entity.creaking.unfreeze"
+  },
+  "block.pale_hanging_moss.idle": {
+    "sounds": [
+      "block/pale_hanging_moss/pale_hanging_moss1",
+      "block/pale_hanging_moss/pale_hanging_moss2",
+      "block/pale_hanging_moss/pale_hanging_moss3",
+      "block/pale_hanging_moss/pale_hanging_moss4",
+      "block/pale_hanging_moss/pale_hanging_moss5",
+      "block/pale_hanging_moss/pale_hanging_moss6",
+      "block/pale_hanging_moss/pale_hanging_moss7",
+      "block/pale_hanging_moss/pale_hanging_moss8",
+      "block/pale_hanging_moss/pale_hanging_moss9",
+      "block/pale_hanging_moss/pale_hanging_moss10",
+      "block/pale_hanging_moss/pale_hanging_moss11",
+      "block/pale_hanging_moss/pale_hanging_moss12",
+      "block/pale_hanging_moss/pale_hanging_moss13",
+      "block/pale_hanging_moss/pale_hanging_moss14",
+      "block/pale_hanging_moss/pale_hanging_moss15"
+    ],
+    "subtitle": "subtitles.ambient.sound"
+  },
+  "block.eyeblossom.close": {
+    "sounds": [
+      "block/eyeblossom/eyeblossom_close1",
+      "block/eyeblossom/eyeblossom_close2",
+      "block/eyeblossom/eyeblossom_close3"
+    ],
+    "subtitle": "subtitles.block.eyeblossom.close"
+  },
+  "block.eyeblossom.close_long": {
+    "sounds": [
+      "block/eyeblossom/eyeblossom_close_long"
+    ],
+    "subtitle": "subtitles.block.eyeblossom.close"
+  },
+  "block.eyeblossom.idle": {
+    "sounds": [
+      "block/eyeblossom/eyeblossom_idle1",
+      "block/eyeblossom/eyeblossom_idle2",
+      "block/eyeblossom/eyeblossom_idle3",
+      "block/eyeblossom/eyeblossom_idle4",
+      "block/eyeblossom/eyeblossom_idle5",
+      "block/eyeblossom/eyeblossom_idle6"
+    ],
+    "subtitle": "subtitles.ambient.sound"
+  },
+  "block.eyeblossom.open": {
+    "sounds": [
+      "block/eyeblossom/eyeblossom_open1",
+      "block/eyeblossom/eyeblossom_open2",
+      "block/eyeblossom/eyeblossom_open3",
+      "block/eyeblossom/eyeblossom_open4"
+    ],
+    "subtitle": "subtitles.block.eyeblossom.open"
+  },
+  "block.eyeblossom.open_long": {
+    "sounds": [
+      "block/eyeblossom/eyeblossom_open_long"
+    ],
+    "subtitle": "subtitles.block.eyeblossom.open"
+  },
+  "music.none": {
+    "sounds": []
   }
 }

@@ -56,6 +56,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.WALL_HANGING_SIGNS).add(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);
         getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(ModBlocks.PALE_OAK_FENCE_GATE);
         getOrCreateTagBuilder(BlockTags.PLANKS).add(ModBlocks.PALE_OAK_PLANKS);
+
+        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE).add(ModBlocks.CREAKING_HEART);
+        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_HOE).add(ModBlocks.PALE_MOSS_BLOCK, ModBlocks.PALE_MOSS_CARPET);
+
+        getOrCreateTagBuilder(BlockTags.FLOWERS).add(ModBlocks.CLOSED_EYEBLOSSOM, ModBlocks.OPEN_EYEBLOSSOM);
+        getOrCreateTagBuilder(BlockTags.SMALL_FLOWERS).add(ModBlocks.CLOSED_EYEBLOSSOM, ModBlocks.OPEN_EYEBLOSSOM);
     }
 
     protected void addVanillaTags() {

@@ -7,15 +7,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.CherryLeavesBlock;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class PaleOakLeavesBlock extends CherryLeavesBlock {
-    public static final MapCodec<CherryLeavesBlock> CODEC = simpleCodec(PaleOakLeavesBlock::new);
+public class PaleOakLeavesBlock extends LeavesBlock {
+    public static final MapCodec<PaleOakLeavesBlock> CODEC = simpleCodec(PaleOakLeavesBlock::new);
 
-    public @NotNull MapCodec<CherryLeavesBlock> codec() {
+    public @NotNull MapCodec<PaleOakLeavesBlock> codec() {
         return CODEC;
     }
 

@@ -1,12 +1,15 @@
 package com.perfectparitypg.world.level.block;
 
 import com.perfectparitypg.sound.ModSounds;
+import com.perfectparitypg.worldgen.ModVegetationFeatures;
+import com.perfectparitypg.worldgen.PaleOakTreeGrower;
 import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -52,9 +55,14 @@ public class ModBlocks {
     public static final Block PALE_OAK_FENCE;
     public static final Block PALE_OAK_DOOR;
 
-    // public static final Block PALE_MOSS_BLOCK;
-    // public static final Block PALE_MOSS_CARPET;
-    // public static final Block PALE_HANGING_MOSS;
+    public static final Block PALE_MOSS_BLOCK;
+    public static final Block PALE_MOSS_CARPET;
+    public static final Block PALE_HANGING_MOSS;
+
+    public static final Block OPEN_EYEBLOSSOM;
+    public static final Block CLOSED_EYEBLOSSOM;
+    public static final Block POTTED_OPEN_EYEBLOSSOM;
+    public static final Block POTTED_CLOSED_EYEBLOSSOM;
 
     public static final Block CREAKING_HEART;
 
@@ -69,7 +77,7 @@ public class ModBlocks {
 
         PALE_OAK_WOOD = register("pale_oak_wood", new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()), true);
         PALE_OAK_PLANKS = register("pale_oak_planks", new Block(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()), true);
-        PALE_OAK_SAPLING = register("pale_oak_sapling", new SaplingBlock(null, BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)), true);
+        PALE_OAK_SAPLING = register("pale_oak_sapling", new SaplingBlock(PaleOakTreeGrower.PALE_OAK, BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)), true);
         PALE_OAK_LOG = register("pale_oak_log", Blocks.log(PALE_OAK_PLANKS.defaultMapColor(), PALE_OAK_WOOD.defaultMapColor()), true);
         STRIPPED_PALE_OAK_LOG = register("stripped_pale_oak_log", Blocks.log(PALE_OAK_PLANKS.defaultMapColor(), PALE_OAK_PLANKS.defaultMapColor(), SoundType.WOOD), true);
         STRIPPED_PALE_OAK_WOOD = register("stripped_pale_oak_wood", new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()), true);
@@ -89,6 +97,16 @@ public class ModBlocks {
         PALE_OAK_DOOR = register("pale_oak_door", new DoorBlock(ModBlockSetTypes.PALE_OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY)), true);
 
         CREAKING_HEART = register("creaking_heart", new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)), true);
+
+        PALE_HANGING_MOSS = register("pale_hanging_moss", new HangingMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)), true);
+        PALE_MOSS_BLOCK = register("pale_moss_block", new ModPaleMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(0.1F).sound(SoundType.MOSS).pushReaction(PushReaction.DESTROY)), true);
+        PALE_MOSS_CARPET = register("pale_moss_carpet", new ModPaleModCarpet(BlockBehaviour.Properties.of().ignitedByLava().mapColor(PALE_MOSS_BLOCK.defaultMapColor()).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY).noOcclusion()),true);
+
+        OPEN_EYEBLOSSOM = register("open_eyeblossom", new EyeblossomBlock(EyeblossomBlock.Type.OPEN, BlockBehaviour.Properties.of().mapColor(CREAKING_HEART.defaultMapColor()).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY).randomTicks()), true);
+        CLOSED_EYEBLOSSOM = register("closed_eyeblossom", new EyeblossomBlock(EyeblossomBlock.Type.CLOSED, BlockBehaviour.Properties.of().mapColor(PALE_OAK_LEAVES.defaultMapColor()).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY).randomTicks()), true);
+        POTTED_OPEN_EYEBLOSSOM = register("potted_open_eyeblossom", new FlowerPotBlock(OPEN_EYEBLOSSOM, BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks()), false);
+        POTTED_CLOSED_EYEBLOSSOM = register("potted_closed_eyeblossom", new FlowerPotBlock(CLOSED_EYEBLOSSOM, BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks()), false);
+
     }
 
     private static ResourceLocation blockId(String string) {

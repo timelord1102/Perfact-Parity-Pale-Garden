@@ -11,6 +11,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,6 +28,26 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     @Override
     public void buildRecipes(RecipeOutput exporter) {
         woodRecipes(exporter);
+
+        shapeless(RecipeCategory.MISC, Items.GRAY_DYE)
+                .requires(ModBlocks.CLOSED_EYEBLOSSOM)
+                        .unlockedBy(getHasName(ModBlocks.CLOSED_EYEBLOSSOM), has(ModBlocks.CLOSED_EYEBLOSSOM))
+                                .save(exporter, ResourceLocation.withDefaultNamespace("gray_dye_from_closed_eyeblossom"));
+
+        shapeless(RecipeCategory.MISC, Items.ORANGE_DYE)
+                .requires(ModBlocks.OPEN_EYEBLOSSOM)
+                .unlockedBy(getHasName(ModBlocks.OPEN_EYEBLOSSOM), has(ModBlocks.OPEN_EYEBLOSSOM))
+                .save(exporter, ResourceLocation.withDefaultNamespace("orange_dye_from_closed_eyeblossom"));
+
+
+        shaped(RecipeCategory.MISC, ModBlocks.CREAKING_HEART)
+                .define('#', ModBlocks.PALE_OAK_LOG)
+                .define('O', ModBlocks.RESIN_BLOCK)
+                .pattern("#")
+                .pattern("O")
+                .pattern("#")
+                .unlockedBy(getHasName(ModBlocks.RESIN_BLOCK), has(ModBlocks.RESIN_BLOCK))
+                .save(exporter, ResourceLocation.withDefaultNamespace("creaking_heart"));
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RESIN_BLOCK)
                 .define('#', ModBlocks.RESIN_CLUMP)

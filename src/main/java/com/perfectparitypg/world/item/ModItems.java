@@ -5,14 +5,12 @@ import com.perfectparitypg.world.entity.ModBoats;
 import com.perfectparitypg.world.level.block.ModBlocks;
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
-
-import java.util.function.Function;
 
 public class ModItems {
 
@@ -106,6 +104,13 @@ public class ModItems {
                 .register((itemGroup) -> itemGroup.addAfter(Items.TRIAL_SPAWNER, ModBlocks.CREAKING_HEART));
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.SPAWN_EGGS)
                 .register((itemGroup) -> itemGroup.addAfter(Items.COW_SPAWN_EGG, ModItems.CREAKING_SPAWN_EGG));
+
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS)
+                .register((itemGroup) -> itemGroup.addAfter(Items.MOSS_CARPET, ModBlocks.PALE_MOSS_BLOCK, ModBlocks.PALE_MOSS_CARPET));
+
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS)
+                .register((itemGroup) -> itemGroup.addAfter(Items.TORCHFLOWER, ModBlocks.CLOSED_EYEBLOSSOM, ModBlocks.OPEN_EYEBLOSSOM));
+
     }
 
     public static void registerFuels() {
@@ -113,7 +118,10 @@ public class ModItems {
     }
 
     public static void registerCompostable() {
-
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.CLOSED_EYEBLOSSOM, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.OPEN_EYEBLOSSOM, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_MOSS_BLOCK, 0.65f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_MOSS_BLOCK, 0.3f);
     }
 
 }

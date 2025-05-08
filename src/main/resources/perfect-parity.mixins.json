@@ -1,11 +1,13 @@
 {
-	"required": true,
-	"package": "com.perfectparitypg.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "com.perfectparitypg.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BushBlockMixin",
+    "ExampleMixin",
+    "TreeDecoratorTypeInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

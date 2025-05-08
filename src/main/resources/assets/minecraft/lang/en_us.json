@@ -49,5 +49,14 @@
   "block.minecraft.creaking_heart": "Creaking Heart",
   "entity.minecraft.creaking": "Creaking",
   "entity.minecraft.creaking_transient": "Creaking",
-  "item.minecraft.creaking_spawn_egg": "Creaking Spawn Egg"
+  "item.minecraft.creaking_spawn_egg": "Creaking Spawn Egg",
+  "block.minecraft.closed_eyeblossom": "Closed Eyeblossom",
+  "block.minecraft.open_eyeblossom": "Open Eyeblossom",
+  "block.minecraft.potted_closed_eyeblossom": "Potted Closed Eyeblossom",
+  "block.minecraft.potted_open_eyeblossom": "Potted Open Eyeblossom",
+  "subtitles.block.eyeblossom.close": "Eyeblossom closes",
+  "subtitles.block.eyeblossom.idle": "Eyeblossom whispers",
+  "subtitles.block.eyeblossom.open": "Eyeblossom opens",
+  "block.minecraft.pale_moss_block": "Pale Moss Block",
+  "block.minecraft.pale_moss_carpet": "Pale Moss Carpet"
 }

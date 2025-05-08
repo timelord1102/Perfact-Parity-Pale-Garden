@@ -31,8 +31,8 @@ import java.util.function.Function;
 
 public class ModModelProvider extends FabricModelProvider {
 
-    private static List<String> armor_materials = List.of("leather", "chainmail", "iron", "gold", "netherite", "diamond");
-    private static List<String> trim_materials = List.of("quartz", "iron", "netherite", "redstone", "copper", "gold", "emerald", "diamond", "lapis", "amethyst");
+    private static final List<String> armor_materials = List.of("leather", "chainmail", "iron", "gold", "netherite", "diamond");
+    private static final List<String> trim_materials = List.of("quartz", "iron", "netherite", "redstone", "copper", "gold", "emerald", "diamond", "lapis", "amethyst");
 
     public ModModelProvider(FabricDataOutput output) {
         super(output);
@@ -72,6 +72,9 @@ public class ModModelProvider extends FabricModelProvider {
         addBlockItem(blockStateModelGenerator, "stripped_pale_oak_wood");
         addBlockItem(blockStateModelGenerator, "stripped_pale_oak_log");
 
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.OPEN_EYEBLOSSOM, BlockModelGenerators.TintState.NOT_TINTED);
+        blockStateModelGenerator.createCrossBlockWithDefaultItem(ModBlocks.CLOSED_EYEBLOSSOM, BlockModelGenerators.TintState.NOT_TINTED);
+
     }
 
     @Override
@@ -79,6 +82,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.generateFlatItem(ModItems.PALE_OAK_BOAT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.PALE_OAK_CHEST_BOAT, ModelTemplates.FLAT_ITEM);
         itemModelGenerator.generateFlatItem(ModItems.RESIN_BRICK, ModelTemplates.FLAT_ITEM);
+
 
         generateTrimModels(itemModelGenerator, "resin", 0.113f);
     }
@@ -123,7 +127,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.blockStateOutput.accept(multiPartGenerator);
     }
 
-    public void generateTrimModels (ItemModelGenerators itemModelGenerators, String materialName, float id) {
+    public static void generateTrimModels (ItemModelGenerators itemModelGenerators, String materialName, float id) {
         List<String> armorTypes = List.of("helmet", "boots", "chestplate", "leggings");
         List<String> trimMaterials = new ArrayList<>(trim_materials.stream().toList());
         trimMaterials.add(materialName);
@@ -137,6 +141,9 @@ public class ModModelProvider extends FabricModelProvider {
                 BigDecimal baseId = new BigDecimal("0.1");
                 for (String trim : trimMaterials) {
                     JsonObject model = new JsonObject();
+                    if (material.equals(trim)) {
+                        trim = trim+"_darker";
+                    }
                     model.addProperty("model", ("minecraft:item/" + material + "_" + type + "_" + trim + "_trim"));
 
                     JsonObject trimType = new JsonObject();
@@ -166,7 +173,7 @@ public class ModModelProvider extends FabricModelProvider {
         }
     }
 
-    private void trimModelHelper(ItemModelGenerators itemModelGenerators, String materialName, String armorType, String armorMaterial) {
+    private static void trimModelHelper(ItemModelGenerators itemModelGenerators, String materialName, String armorType, String armorMaterial) {
         ResourceLocation armorLocation = ResourceLocation.withDefaultNamespace("item/" + armorMaterial + "_" + armorType + "_" + materialName + "_trim");
 
         JsonObject json = new JsonObject();

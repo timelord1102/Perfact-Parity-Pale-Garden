@@ -15,6 +15,14 @@ repositories {
 		name = "TerrformersMC"
 		url = uri('https://maven.terraformersmc.com/')
 	}
+	maven {
+		name = "CurseMaven"
+		url = "https://cursemaven.com"
+	}
+
+	maven {
+		url = uri('https://maven.minecraftforge.net/')
+	}
 }
 
 fabricApi {
@@ -40,6 +48,11 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+
+	modImplementation "curse.maven:continuity-531351:5962881"
+	modLocalRuntime("curse.maven:continuity-531351:5962880")
+
+	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.minecraft_version}-4.1.0.8"
 }
 
 processResources {

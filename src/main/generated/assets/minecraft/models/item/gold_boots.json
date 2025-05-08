@@ -32,7 +32,7 @@
       }
     },
     {
-      "model": "minecraft:item/gold_boots_gold_trim",
+      "model": "minecraft:item/gold_boots_gold_darker_trim",
       "predicate": {
         "trim_type": 0.6
       }
