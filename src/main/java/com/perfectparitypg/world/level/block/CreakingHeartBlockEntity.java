@@ -1,7 +1,6 @@
 package com.perfectparitypg.world.level.block;
 
 import com.mojang.datafixers.util.Either;
-import com.perfectparitypg.PerfectParityPG;
 import com.perfectparitypg.datagen.ModBlockTagProvider;
 import com.perfectparitypg.entity.ModEntities;
 import com.perfectparitypg.entity.creaking.Creaking;
@@ -15,6 +14,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.SpawnUtil;
 import net.minecraft.world.Difficulty;
@@ -24,6 +24,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -66,6 +67,9 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     private Vec3 emitterTarget;
     private int outputSignal;
 
+    static SpawnUtil.Strategy ON_TOP_OF_COLLIDER_NO_LEAVES = (serverLevel, blockPos, blockState, blockPos2, blockState2) -> blockState2.getCollisionShape(serverLevel, blockPos2).isEmpty() && !blockState.is(BlockTags.LEAVES) && Block.isFaceFull(blockState.getCollisionShape(serverLevel, blockPos), Direction.UP);
+
+
     public CreakingHeartBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.CREAKING_HEART, blockPos, blockState);
     }
@@ -73,6 +77,9 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, CreakingHeartBlockEntity creakingHeartBlockEntity) {
         ++creakingHeartBlockEntity.ticksExisted;
         if (level instanceof ServerLevel serverLevel) {
+            if (level.isDay()) {
+                level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ACTIVE, false), 3);
+            }
             int i = creakingHeartBlockEntity.computeAnalogOutputSignal();
             if (creakingHeartBlockEntity.outputSignal != i) {
                 creakingHeartBlockEntity.outputSignal = i;
@@ -101,10 +108,14 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             if (creakingHeartBlockEntity.ticker-- < 0) {
                 creakingHeartBlockEntity.ticker = creakingHeartBlockEntity.level == null ? 20 : creakingHeartBlockEntity.level.random.nextInt(5) + 20;
                 if (creakingHeartBlockEntity.creakingInfo == null) {
-                    if (!CreakingHeartBlock.hasRequiredLogs(blockState, level, blockPos)) {
-                        level.setBlock(blockPos, (BlockState)blockState.setValue(CreakingHeartBlock.ACTIVE, false), 3);
-                    } else if ((Boolean)blockState.getValue(CreakingHeartBlock.ACTIVE)) {
+                    if (!CreakingHeartBlock.hasRequiredLogs(blockState, level, blockPos) || level.isDay()) {
+                        level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ACTIVE, false), 3);
+                        if (!CreakingHeartBlock.hasRequiredLogs(blockState, level, blockPos)) {
+                            level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ENABLED, false), 3);
+                        }
+                    } else if ((Boolean)blockState.getValue(CreakingHeartBlock.ENABLED)) {
                         if (CreakingHeartBlock.isNaturalNight(level)) {
+                            level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ACTIVE, blockState.getValue(CreakingHeartBlock.ENABLED)), 3);
                             if (level.getDifficulty() != Difficulty.PEACEFUL) {
                                 if (serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)) {
                                     Player player = level.getNearestPlayer((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), (double)32.0F, false);
@@ -125,13 +136,14 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     Optional<Creaking> optional = creakingHeartBlockEntity.getCreakingProtector();
                     if (optional.isPresent()) {
                         Creaking creaking = (Creaking)optional.get();
-                        if (!CreakingHeartBlock.isNaturalNight(level) || creakingHeartBlockEntity.distanceToCreaking() > (double)34.0F || creaking.playerIsStuckInYou()) {
+                        if ((!CreakingHeartBlock.isNaturalNight(level) && !creaking.hasCustomName()) || creakingHeartBlockEntity.distanceToCreaking() > (double)34.0F || creaking.playerIsStuckInYou()) {
                             creakingHeartBlockEntity.removeProtector((DamageSource)null);
                             return;
                         }
 
                         if (!CreakingHeartBlock.hasRequiredLogs(blockState, level, blockPos) && creakingHeartBlockEntity.creakingInfo == null) {
                             level.setBlock(blockPos, (BlockState)blockState.setValue(CreakingHeartBlock.ACTIVE, false), 3);
+                            level.setBlock(blockPos, (BlockState)blockState.setValue(CreakingHeartBlock.ENABLED, false), 3);
                         }
                     }
 
@@ -198,7 +210,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     @Nullable
     private static Creaking spawnProtector(ServerLevel serverLevel, CreakingHeartBlockEntity creakingHeartBlockEntity) {
         BlockPos blockPos = creakingHeartBlockEntity.getBlockPos();
-        Optional<Creaking> optional = SpawnUtil.trySpawnMob(ModEntities.CREAKING, MobSpawnType.SPAWNER, serverLevel, blockPos, 5, 16, 8, SpawnUtil.Strategy.ON_TOP_OF_COLLIDER);
+        Optional<Creaking> optional = SpawnUtil.trySpawnMob(ModEntities.CREAKING, MobSpawnType.SPAWNER, serverLevel, blockPos, 5, 16, 8, ON_TOP_OF_COLLIDER_NO_LEAVES);
         if (optional.isEmpty()) {
             return null;
         } else {
@@ -303,7 +315,6 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
     public void removeProtector(@Nullable DamageSource damageSource) {
         Object var3 = this.getCreakingProtector().orElse((Creaking) null);
-        PerfectParityPG.LOGGER.info(String.valueOf(damageSource));
         if (var3 instanceof Creaking creaking) {
             if (damageSource == null) {
                 creaking.tearDown();
