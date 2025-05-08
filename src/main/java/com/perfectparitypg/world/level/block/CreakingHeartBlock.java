@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -35,12 +34,13 @@ import java.util.function.BiConsumer;
 public class CreakingHeartBlock extends BaseEntityBlock {
     public static final MapCodec<CreakingHeartBlock> CODEC = simpleCodec(CreakingHeartBlock::new);
     public static final EnumProperty<Direction.Axis> AXIS;
-    public static final BooleanProperty ACTIVE;
+    public static BooleanProperty ACTIVE;
     public static final BooleanProperty NATURAL;
+    public static final BooleanProperty ENABLED;
 
     public CreakingHeartBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(ACTIVE, false).setValue(NATURAL, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(ACTIVE, false).setValue(NATURAL, false).setValue(ENABLED, false));
     }
 
     @Override
@@ -64,7 +64,8 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         if (level.isClientSide) {
             return null;
         } else {
-            return (Boolean)blockState.getValue(ACTIVE) ? createTickerHelper(blockEntityType, ModBlockEntities.CREAKING_HEART, CreakingHeartBlockEntity::serverTick) : null;
+            // blockState.setValue(ACTIVE, blockState.getValue(ENABLED));
+            return (Boolean)blockState.getValue(ENABLED) ? createTickerHelper(blockEntityType, ModBlockEntities.CREAKING_HEART, CreakingHeartBlockEntity::serverTick) : null;
         }
     }
 
@@ -76,7 +77,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (isNaturalNight(level)) {
-            if ((Boolean)blockState.getValue(ACTIVE)) {
+            if ((Boolean)blockState.getValue(ENABLED)) {
                 if (randomSource.nextInt(16) == 0 && isSurroundedByLogs(level, blockPos)) {
                    level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
                 }
@@ -93,8 +94,8 @@ public class CreakingHeartBlock extends BaseEntityBlock {
 
     private static BlockState updateState(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
         boolean bl = hasRequiredLogs(blockState, levelAccessor, blockPos);
-        boolean bl2 = !(Boolean)blockState.getValue(ACTIVE);
-        return bl && bl2 ? blockState.setValue(ACTIVE, true) : blockState;
+        boolean bl2 = !(Boolean)blockState.getValue(ENABLED);
+        return bl && bl2 ? blockState.setValue(ENABLED, true) : blockState;
     }
 
     public static boolean hasRequiredLogs(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
@@ -153,13 +154,15 @@ public class CreakingHeartBlock extends BaseEntityBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{AXIS, ACTIVE, NATURAL});
+        builder.add(new Property[]{AXIS, ACTIVE, NATURAL, ENABLED});
     }
 
     protected void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        BlockEntity var7 = level.getBlockEntity(blockPos);
-        if (var7 instanceof CreakingHeartBlockEntity creakingHeartBlockEntity) {
-            creakingHeartBlockEntity.removeProtector((DamageSource)null);
+        if (blockState.getBlock() != blockState2.getBlock()) {
+            BlockEntity be = level.getBlockEntity(blockPos);
+            if (be instanceof CreakingHeartBlockEntity heart) {
+                heart.removeProtector(null);
+            }
         }
 
         super.onRemove(blockState, level, blockPos, blockState2, bl);
@@ -221,5 +224,6 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         AXIS = BlockStateProperties.AXIS;
         ACTIVE = BooleanProperty.create("active");
         NATURAL = BooleanProperty.create("natural");
+        ENABLED = BlockStateProperties.ENABLED;
     }
 }

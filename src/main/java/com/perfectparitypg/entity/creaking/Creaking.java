@@ -18,7 +18,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -301,6 +300,7 @@ public class Creaking extends Monster {
     }
 
 
+
     private void setupAnimationStates() {
         this.attackAnimationState.animateWhen(this.attackAnimationRemainingTicks > 0, this.tickCount);
         this.invulnerabilityAnimationState.animateWhen(this.invulnerabilityAnimationRemainingTicks > 0, this.tickCount);
@@ -316,7 +316,7 @@ public class Creaking extends Monster {
             double e = aABB2.getYsize() * 0.3;
             double f = aABB2.getZsize() * 0.3;
             serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.PALE_OAK_WOOD.defaultBlockState()), vec3.x, vec3.y, vec3.z, 100, d, e, f, (double)0.0F);
-            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, (BlockState)ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true)), vec3.x, vec3.y, vec3.z, 10, d, e, f, (double)0.0F);
+            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, (BlockState)ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ENABLED, true)), vec3.x, vec3.y, vec3.z, 10, d, e, f, (double)0.0F);
         }
 
         this.makeSound(this.getDeathSound());
