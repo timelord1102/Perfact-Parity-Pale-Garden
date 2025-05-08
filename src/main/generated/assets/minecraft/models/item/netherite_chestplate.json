@@ -14,7 +14,7 @@
       }
     },
     {
-      "model": "minecraft:item/netherite_chestplate_netherite_trim",
+      "model": "minecraft:item/netherite_chestplate_netherite_darker_trim",
       "predicate": {
         "trim_type": 0.3
       }

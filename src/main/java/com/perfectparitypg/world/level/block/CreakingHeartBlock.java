@@ -98,6 +98,21 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         return bl && bl2 ? blockState.setValue(ENABLED, true) : blockState;
     }
 
+
+    @Override
+    public void onPlace(BlockState state, Level lvl, BlockPos pos,
+                        BlockState old, boolean moving) {
+        lvl.scheduleTick(pos, this, 1);   // run tick() next tick
+    }
+
+    @Override
+    public void tick(BlockState state, ServerLevel lvl, BlockPos pos, RandomSource r) {
+        BlockState updated = updateState(state, lvl, pos);
+        if (updated != state) {
+            lvl.setBlock(pos, updated, Block.UPDATE_CLIENTS);
+        }
+    }
+
     public static boolean hasRequiredLogs(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
         Direction.Axis axis = blockState.getValue(AXIS);
 
@@ -117,16 +132,12 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         }
 
         for(Direction direction : directions) {
-            System.out.println(String.valueOf(blockPos.relative(direction)) + "0");
-            System.out.println(String.valueOf(blockPos.relative(direction)) + "0");
             BlockState blockState2 = levelAccessor.getBlockState(blockPos.relative(direction));
             if (!blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.getValue(AXIS) != axis) {
                 if (blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS)) {
-                    System.out.println(String.valueOf(blockState2.getValue(AXIS)) + "1");
                 }
                 return false;
             }
-            System.out.println(String.valueOf(blockState2.getValue(AXIS)) + "2");
         }
 
         return true;

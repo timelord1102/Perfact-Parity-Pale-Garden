@@ -1,5 +1,6 @@
-// 1.21.1	2025-05-07T22:21:37.9525643	Perfect Parity Pale Garden Edition/Block Loot Tables
+// 1.21.1	2025-05-08T04:56:01.3948572	Perfect Parity Pale Garden Edition/Block Loot Tables
 165b6e063983141527e6d889d33d0365f896352e data\minecraft\loot_table\blocks\stripped_pale_oak_wood.json
+c3dff70a248583f8f021c483a40ed0e5d90b1719 data\minecraft\loot_table\blocks\closed_eyeblossom.json
 76bf46059d904f8eba8972af40e75c7feda1c196 data\minecraft\loot_table\blocks\resin_brick_slab.json
 c0320bb62abb849fc75fda52a38231dae9339745 data\minecraft\loot_table\blocks\resin_bricks.json
 01c4320c61261bfa8f52d352b9b9a3ef7d5262f6 data\minecraft\loot_table\blocks\pale_oak_pressure_plate.json
@@ -8,8 +9,9 @@ c0320bb62abb849fc75fda52a38231dae9339745 data\minecraft\loot_table\blocks\resin_
 56a52414d2b1b0332701e0e86ea54aeebd9bb53a data\minecraft\loot_table\blocks\pale_oak_wall_sign.json
 a6d29d76db49aa32f2e051ef4e7f160582602af7 data\minecraft\loot_table\blocks\resin_block.json
 b8ed3089c2968a09dbb4df279f910acae6bbead7 data\minecraft\loot_table\blocks\pale_oak_wall_hanging_sign.json
-d86f06fa0c68abc96625a7b97643f1cc1f7e8328 data\minecraft\loot_table\blocks\resin_brick_wall.json
 f4d3a103614a5fb994f50d6a8c6afc8cd82fc079 data\minecraft\loot_table\blocks\pale_oak_fence_gate.json
+d86f06fa0c68abc96625a7b97643f1cc1f7e8328 data\minecraft\loot_table\blocks\resin_brick_wall.json
+38b8712417eeb4c4432c8265660e0cdb8ba7c317 data\minecraft\loot_table\blocks\pale_moss_block.json
 56a52414d2b1b0332701e0e86ea54aeebd9bb53a data\minecraft\loot_table\blocks\pale_oak_sign.json
 b8ed3089c2968a09dbb4df279f910acae6bbead7 data\minecraft\loot_table\blocks\pale_oak_hanging_sign.json
 1e1a55d03123abbceb5df5cf8bc25b6fb51dbdeb data\minecraft\loot_table\blocks\pale_oak_sapling.json
@@ -17,7 +19,9 @@ b8ed3089c2968a09dbb4df279f910acae6bbead7 data\minecraft\loot_table\blocks\pale_o
 50b35145b3c24e01b654b1d3a27ba32cdfe8a8d1 data\minecraft\loot_table\blocks\pale_oak_log.json
 535f8d7ab3b38ed37c027eace7dacdee7421a7d6 data\minecraft\loot_table\blocks\stripped_pale_oak_log.json
 831ca77b9781ad1ec7aabccdfb4d1224c266743a data\minecraft\loot_table\blocks\pale_oak_trapdoor.json
+88ee26bf2c5eda8163af3b2e2911116abb00940b data\minecraft\loot_table\blocks\open_eyeblossom.json
 ee286b3a525c3f6ad030ad8c2de1b1a55253264c data\minecraft\loot_table\blocks\pale_oak_stairs.json
+f6802ffef5acbacf3895ab1daf8acb9693a37c74 data\minecraft\loot_table\blocks\pale_moss_carpet.json
 84bfaba6b9767f8587328c000e9fc46cb73b704f data\minecraft\loot_table\blocks\pale_oak_slab.json
 7439825386d8f0321e9feb1849618f5ce53f2ab2 data\minecraft\loot_table\blocks\resin_clump.json
 57c0321935350ad7492ea6552a9d5dbc8c8f107b data\minecraft\loot_table\blocks\pale_oak_fence.json

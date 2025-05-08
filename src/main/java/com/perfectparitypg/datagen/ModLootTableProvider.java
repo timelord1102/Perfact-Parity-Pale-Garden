@@ -45,6 +45,13 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         dropOther(ModBlocks.PALE_OAK_WALL_SIGN, ModItems.PALE_OAK_SIGN);
         dropOther(ModBlocks.PALE_OAK_HANGING_SIGN, ModItems.PALE_OAK_HANGING_SIGN);
         dropOther(ModBlocks.PALE_OAK_WALL_HANGING_SIGN, ModItems.PALE_OAK_HANGING_SIGN);
+        createDoublePlantShearsDrop(ModBlocks.PALE_HANGING_MOSS);
+        createPotFlowerItemTable(ModBlocks.OPEN_EYEBLOSSOM);
+        createPotFlowerItemTable(ModBlocks.CLOSED_EYEBLOSSOM);
+        dropSelf(ModBlocks.OPEN_EYEBLOSSOM);
+        dropSelf(ModBlocks.CLOSED_EYEBLOSSOM);
+        dropSelf(ModBlocks.PALE_MOSS_BLOCK);
+        dropSelf(ModBlocks.PALE_MOSS_CARPET);
     }
 
 

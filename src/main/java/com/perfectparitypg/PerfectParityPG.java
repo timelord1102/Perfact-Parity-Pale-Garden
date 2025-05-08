@@ -9,6 +9,9 @@ import com.perfectparitypg.world.item.ModItems;
 import com.perfectparitypg.world.level.block.ModBlockFamilies;
 import com.perfectparitypg.world.level.block.ModBlockEntities;
 import com.perfectparitypg.world.level.block.ModBlocks;
+import com.perfectparitypg.worldgen.ModTreeDecoratorType;
+import com.perfectparitypg.worldgen.ModVegetationFeatures;
+import com.perfectparitypg.worldgen.PaleOakTreeGrower;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -37,7 +40,12 @@ public class PerfectParityPG implements ModInitializer {
 		ModEntities.registerModEntities();
 		ModBlockEntities.registerBlockEntities();
 		ModParticles.registerParticles();
+		ModVegetationFeatures.registerVegetationFeatures();
+		ModTreeDecoratorType.registerTreeDecorators();
+		PaleOakTreeGrower.registerTreeGrower();
 
 		LOGGER.info("1.21.4 Features Added!");
+
+
 	}
 }

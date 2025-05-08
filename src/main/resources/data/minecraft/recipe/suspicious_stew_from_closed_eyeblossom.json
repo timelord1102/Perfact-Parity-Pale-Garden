@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "suspicious_stew",
+
+  "ingredients": [
+    { "item": "minecraft:bowl" },
+    { "item": "minecraft:brown_mushroom" },
+    { "item": "minecraft:red_mushroom" },
+    { "item": "minecraft:closed_eyeblossom" }
+  ],
+
+  "result": {
+    "id": "minecraft:suspicious_stew",
+    "count": 1,
+
+    "components": {
+      "minecraft:suspicious_stew_effects": [
+        { "id": "minecraft:nausea", "duration": 140 }
+      ]
+    }
+  }
+}

@@ -44,7 +44,7 @@
       }
     },
     {
-      "model": "minecraft:item/diamond_boots_diamond_trim",
+      "model": "minecraft:item/diamond_boots_diamond_darker_trim",
       "predicate": {
         "trim_type": 0.8
       }
