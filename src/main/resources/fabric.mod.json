@@ -3,7 +3,7 @@
 	"id": "perfect-parity-pg",
 	"version": "${version}",
 	"name": "Perfect Parity Pale Garden Edition",
-	"description": "A near 1:1 backport of 1.21.4",
+	"description": "A near 1:1 backport of Minecraft 1.21.4, The Garden Awakens",
 	"authors": [
 		"timelord1102"
 	],
