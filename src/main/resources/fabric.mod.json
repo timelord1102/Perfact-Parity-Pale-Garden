@@ -5,7 +5,7 @@
 	"name": "Perfect Parity Pale Garden Edition",
 	"description": "A near 1:1 backport of 1.21.4",
 	"authors": [
-		"Me!"
+		"timelord1102"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -29,15 +29,16 @@
 		]
 	},
 	"mixins": [
-		"perfect-parity.mixins.json"
+		"perfect-parity-pg.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.14",
 		"minecraft": "~1.21.1",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"terrablender": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"continuity": "*"
 	}
 }
