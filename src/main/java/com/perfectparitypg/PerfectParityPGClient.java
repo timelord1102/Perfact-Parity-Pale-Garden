@@ -1,5 +1,6 @@
 package com.perfectparitypg;
 
+import com.perfectparitypg.entity.ModEntityRenderer;
 import com.perfectparitypg.entity.ModModelLayers;
 import com.perfectparitypg.entity.monster.CreakingModel;
 import com.perfectparitypg.particle.ModParticles;
@@ -23,6 +24,9 @@ import net.minecraft.world.level.biome.Biome;
 public class PerfectParityPGClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+
+        ModEntityRenderer.registerEntityRenderers();
+
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.RESIN_CLUMP, ModBlocks.POTTED_PALE_OAK_SAPLING,
                 ModBlocks.PALE_OAK_SAPLING, ModBlocks.PALE_OAK_LEAVES, ModBlocks.PALE_HANGING_MOSS, ModBlocks.PALE_MOSS_CARPET,
                 ModBlocks.OPEN_EYEBLOSSOM, ModBlocks.CLOSED_EYEBLOSSOM);

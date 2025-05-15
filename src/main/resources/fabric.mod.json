@@ -8,8 +8,8 @@
 		"timelord1102"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/perfect-parity-the-garden-awakens-edition",
+		"sources": "https://github.com/timelord1102/Perfact-Parity-Pale-Garden/"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/perfect-parity-pg/icon.png",

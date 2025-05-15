@@ -1,8 +1,6 @@
 package com.perfectparitypg.entity;
 
 import com.perfectparitypg.entity.creaking.Creaking;
-import com.perfectparitypg.entity.monster.CreakingRenderer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,5 +19,5 @@ public class ModEntities {
 
     public static void registerModEntities() {
         FabricDefaultAttributeRegistry.register(CREAKING, Creaking.createAttributes());
-        EntityRendererRegistry.register(ModEntities.CREAKING, CreakingRenderer::new);}
+    }
 }
