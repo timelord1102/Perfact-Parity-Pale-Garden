@@ -106,7 +106,7 @@ public class ModItems {
                 .register((itemGroup) -> itemGroup.addAfter(Items.COW_SPAWN_EGG, ModItems.CREAKING_SPAWN_EGG));
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS)
-                .register((itemGroup) -> itemGroup.addAfter(Items.MOSS_CARPET, ModBlocks.PALE_MOSS_BLOCK, ModBlocks.PALE_MOSS_CARPET));
+                .register((itemGroup) -> itemGroup.addAfter(Items.MOSS_CARPET, ModBlocks.PALE_MOSS_BLOCK, ModBlocks.PALE_MOSS_CARPET, ModBlocks.PALE_HANGING_MOSS));
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.NATURAL_BLOCKS)
                 .register((itemGroup) -> itemGroup.addAfter(Items.TORCHFLOWER, ModBlocks.CLOSED_EYEBLOSSOM, ModBlocks.OPEN_EYEBLOSSOM));

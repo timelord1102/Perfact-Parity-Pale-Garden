@@ -98,6 +98,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.RESIN_BLOCK), has(ModBlocks.RESIN_BLOCK))
                 .save(exporter, ResourceLocation.withDefaultNamespace("resin_clump_from_block"));
 
+        smeltingResultFromBase(exporter, ModItems.RESIN_BRICK, ModItems.RESIN_CLUMP);
+
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS,
                 ModBlocks.RESIN_BRICK_SLAB, ModBlocks.RESIN_BRICKS, 2);
         stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS,

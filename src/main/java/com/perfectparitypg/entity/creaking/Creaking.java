@@ -285,7 +285,6 @@ public class Creaking extends Monster {
             checkEyeBlink();
             if (!this.level().isClientSide() && this.deathTime > 45 && !this.isRemoved()) {
                 this.tearDown();
-                System.out.println("death");
             }
         } else {
             super.tickDeath();
@@ -438,7 +437,6 @@ public class Creaking extends Monster {
     }
 
     public void checkEyeBlink() {
-        System.out.println(String.valueOf(this.deathTime > this.nextFlickerTime));
         if (this.deathTime > this.nextFlickerTime) {
             this.nextFlickerTime = this.deathTime + this.getRandom().nextIntBetweenInclusive(this.eyesGlowing ? 2 : this.deathTime / 4, this.eyesGlowing ? 8 : this.deathTime / 2);
             this.setIsActive(!this.isActive());

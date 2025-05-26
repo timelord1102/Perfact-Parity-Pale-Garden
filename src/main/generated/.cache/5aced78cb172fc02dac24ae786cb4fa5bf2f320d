@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-08T04:56:01.393297	Perfect Parity Pale Garden Edition/Recipes
+// 1.21.1	2025-05-26T01:43:28.8710002	Perfect Parity Pale Garden Edition/Recipes
 e8f986a41c69c82a655a3a68a2665506ebab84f0 data\perfect-parity-pg\advancement\recipes\building_blocks\stripped_pale_oak_wood.json
 b17881ff9e40a4098a384e0b95376b62fff6d7d7 data\perfect-parity-pg\advancement\recipes\decorations\pale_oak_chest_boat.json
 81115f4a4ea5ec638d01a6bb8076a0b06791517f data\perfect-parity-pg\advancement\recipes\building_blocks\chiseled_resin_bricks_from_resin_bricks_stonecutting.json
@@ -15,6 +15,7 @@ f7cc7be5ab430bfd69ef555c15239aef0d78fa15 data\perfect-parity-pg\recipe\resin_clu
 1e7be09136938ef9162d5c49085fb2364cb527d3 data\perfect-parity-pg\advancement\recipes\building_blocks\resin_bricks.json
 437fd6ced8f2802e2374c958db2ddef7f4585bc2 data\perfect-parity-pg\recipe\chiseled_resin_bricks_from_resin_bricks_stonecutting.json
 de5c4aec3039cc4e3920b732afb05ad552c5698c data\perfect-parity-pg\recipe\pale_oak_stairs.json
+555fcbd766bf71e60d835671b589b32ad3630b7e data\perfect-parity-pg\advancement\recipes\building_blocks\resin_brick.json
 9e3cfb677891ab6cfe496a8c7920bccd81cdab38 data\perfect-parity-pg\advancement\recipes\redstone\pale_oak_fence_gate.json
 76a64075168456bfa4ecbd1953e1f24105899d1a data\perfect-parity-pg\advancement\recipes\building_blocks\resin_brick_wall.json
 0e820c52c57e02b623500538ff680d83648244a6 data\perfect-parity-pg\recipe\resin_block.json
@@ -49,6 +50,7 @@ c2b116bfe5a617940e2b26b2a5909861feffd6bc data\perfect-parity-pg\advancement\reci
 8b362884465fc1a393a22be971a56d3f1cf351fc data\perfect-parity-pg\advancement\recipes\misc\orange_dye_from_closed_eyeblossom.json
 710def615c2ae6285d961133ad19b42ee993eb66 data\perfect-parity-pg\recipe\pale_oak_button.json
 7ed31ce53a8c4a18170f80a78912b065ac78b78f data\perfect-parity-pg\advancement\recipes\misc\resin_clump_from_block.json
+c375806acd3b4f6c17df2f3d88ccab5e031dc50e data\perfect-parity-pg\recipe\resin_brick.json
 0f53e2d35de3f33378e1296637277b320cb6d12b data\perfect-parity-pg\recipe\resin_brick_stairs_from_resin_bricks_stonecutting.json
 79d24a08a5eea098d066f8ae70bc7ecb87a44278 data\perfect-parity-pg\advancement\recipes\misc\gray_dye_from_closed_eyeblossom.json
 d4aacd985b12e0eb090bb4d80f89bfec5e59cafd data\perfect-parity-pg\advancement\recipes\misc\pale_oak_fence.json

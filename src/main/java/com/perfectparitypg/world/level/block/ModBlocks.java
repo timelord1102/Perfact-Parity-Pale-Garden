@@ -1,7 +1,6 @@
 package com.perfectparitypg.world.level.block;
 
 import com.perfectparitypg.sound.ModSounds;
-import com.perfectparitypg.worldgen.ModVegetationFeatures;
 import com.perfectparitypg.worldgen.PaleOakTreeGrower;
 import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
@@ -9,7 +8,6 @@ import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock
 import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -82,7 +80,7 @@ public class ModBlocks {
         STRIPPED_PALE_OAK_LOG = register("stripped_pale_oak_log", Blocks.log(PALE_OAK_PLANKS.defaultMapColor(), PALE_OAK_PLANKS.defaultMapColor(), SoundType.WOOD), true);
         STRIPPED_PALE_OAK_WOOD = register("stripped_pale_oak_wood", new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()), true);
         PALE_OAK_LEAVES = register("pale_oak_leaves", new PaleOakLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GREEN).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never).isViewBlocking(Blocks::never).ignitedByLava().pushReaction(PushReaction.DESTROY).isRedstoneConductor(Blocks::never)), true);
-        PALE_OAK_SIGN = register("pale_oak_sign", new TerraformSignBlock(PALE_OAK_SIGN_TEXTURE, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava()), true);
+        PALE_OAK_SIGN = register("pale_oak_sign", new TerraformSignBlock(PALE_OAK_SIGN_TEXTURE, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava()), false);
         PALE_OAK_WALL_SIGN = register("pale_oak_wall_sign", new TerraformWallSignBlock(PALE_OAK_SIGN_TEXTURE, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava()), false);
         PALE_OAK_HANGING_SIGN = register("pale_oak_hanging_sign", new TerraformHangingSignBlock(PALE_OAK_HANGING_SIGN_TEXTURE, PALE_OAK_HANGING_SIGN_GUI_TEXTURE, ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava()),false);
         PALE_OAK_WALL_HANGING_SIGN = register("pale_oak_wall_hanging_sign", new TerraformWallHangingSignBlock(PALE_OAK_HANGING_SIGN_TEXTURE, PALE_OAK_HANGING_SIGN_GUI_TEXTURE, ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava()), false);
