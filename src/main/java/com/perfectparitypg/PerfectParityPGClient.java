@@ -29,7 +29,7 @@ public class PerfectParityPGClient implements ClientModInitializer {
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.RESIN_CLUMP, ModBlocks.POTTED_PALE_OAK_SAPLING,
                 ModBlocks.PALE_OAK_SAPLING, ModBlocks.PALE_OAK_LEAVES, ModBlocks.PALE_HANGING_MOSS, ModBlocks.PALE_MOSS_CARPET,
-                ModBlocks.OPEN_EYEBLOSSOM, ModBlocks.CLOSED_EYEBLOSSOM);
+                ModBlocks.OPEN_EYEBLOSSOM, ModBlocks.CLOSED_EYEBLOSSOM, ModBlocks.POTTED_CLOSED_EYEBLOSSOM, ModBlocks.POTTED_OPEN_EYEBLOSSOM);
 
 
         TerraformBoatClientHelper.registerModelLayers(ModBoats.PALE_OAK_BOAT_ID, false);
