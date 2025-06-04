@@ -14,6 +14,7 @@ import com.perfectparitypg.worldgen.ModVegetationFeatures;
 import com.perfectparitypg.worldgen.PaleOakTreeGrower;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,9 @@ public class PerfectParityPG implements ModInitializer {
 		ModVegetationFeatures.registerVegetationFeatures();
 		ModTreeDecoratorType.registerTreeDecorators();
 		PaleOakTreeGrower.registerTreeGrower();
+
+		StrippableBlockRegistry.register(ModBlocks.PALE_OAK_LOG, ModBlocks.STRIPPED_PALE_OAK_LOG);
+		StrippableBlockRegistry.register(ModBlocks.PALE_OAK_WOOD, ModBlocks.STRIPPED_PALE_OAK_WOOD);
 
 		LOGGER.info("1.21.4 Features Added!");
 
