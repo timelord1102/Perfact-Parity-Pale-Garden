@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Function;
 
 
@@ -130,7 +129,7 @@ public class ModModelProvider extends FabricModelProvider {
     public static void generateTrimModels (ItemModelGenerators itemModelGenerators, String materialName, float id) {
         List<String> armorTypes = List.of("helmet", "boots", "chestplate", "leggings");
         List<String> trimMaterials = new ArrayList<>(trim_materials.stream().toList());
-        trimMaterials.add(materialName);
+        // trimMaterials.add(materialName);
 
         for (String material : armor_materials) {
             for (String type: armorTypes) {
@@ -144,16 +143,22 @@ public class ModModelProvider extends FabricModelProvider {
                     if (material.equals(trim)) {
                         trim = trim+"_darker";
                     }
+
+                    if (baseId.floatValue() - id < 0.1 && baseId.floatValue() - id > 0.0) {
+                        JsonObject model2 = new JsonObject();
+                        model2.addProperty("model", ("minecraft:item/" + material + "_" + type + "_" + materialName + "_trim"));
+                        JsonObject trimType2 = new JsonObject();
+                        trimType2.addProperty("trim_type", id);
+                        trimModelHelper(itemModelGenerators, materialName, type, material);
+                        model2.add("predicate", trimType2);
+                        overrides.add(model2);
+                    }
+
                     model.addProperty("model", ("minecraft:item/" + material + "_" + type + "_" + trim + "_trim"));
 
                     JsonObject trimType = new JsonObject();
-                    if (Objects.equals(trim, materialName)) {
-                        trimType.addProperty("trim_type", id);
-                        trimModelHelper(itemModelGenerators, materialName, type, material);
-                    } else {
-                        trimType.addProperty("trim_type", baseId.floatValue());
-                        baseId = baseId.add(new BigDecimal("0.1"));
-                    }
+                    trimType.addProperty("trim_type", baseId.floatValue());
+                    baseId = baseId.add(new BigDecimal("0.1"));
 
                     model.add("predicate", trimType);
                     overrides.add(model);

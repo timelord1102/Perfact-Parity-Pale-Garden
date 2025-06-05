@@ -8,6 +8,12 @@
       }
     },
     {
+      "model": "minecraft:item/netherite_boots_resin_trim",
+      "predicate": {
+        "trim_type": 0.113
+      }
+    },
+    {
       "model": "minecraft:item/netherite_boots_iron_trim",
       "predicate": {
         "trim_type": 0.2
@@ -59,12 +65,6 @@
       "model": "minecraft:item/netherite_boots_amethyst_trim",
       "predicate": {
         "trim_type": 1.0
-      }
-    },
-    {
-      "model": "minecraft:item/netherite_boots_resin_trim",
-      "predicate": {
-        "trim_type": 0.113
       }
     }
   ],
