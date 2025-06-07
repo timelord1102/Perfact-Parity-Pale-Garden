@@ -41,6 +41,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -495,15 +496,21 @@ public class Creaking extends Monster {
         // Freeze if **any** nearby player is staring at us
         boolean bl2 = false;
         for (Player p : players) {
-            if (!this.isAlliedTo(p) && isLookingAtMe(p, 0.5F, false,
-                    this.getEyeY(), this.getY() + 0.5 * this.getScale(),
-                    (this.getEyeY() + this.getY()) / 2.0)) {
+            if (this.canAttack(p) && !this.isAlliedTo(p)) {
+                bl2 = true;
+                if ((!bl || !p.getInventory().armor.get(3).is(Blocks.CARVED_PUMPKIN.asItem())) && (isLookingAtMe(p, 0.5F, false,
+                        this.getEyeY(), this.getY() + 0.5 * this.getScale(),
+                        (this.getEyeY() + this.getY()) / 2.0))) {
 
-                // If close enough, and we weren’t already angry, become active
-                if (!isActive() && p.distanceToSqr(this) < 144.0) {
-                    activate(p);   // sets ATTACK_TARGET, isActive = true
+                    if (bl) {
+                        return false;
+                    }
+                    // If close enough, and we weren’t already angry, become active
+                    if (p.distanceToSqr(this) < (double)144.0F) {
+                        this.activate(p);
+                        return false;
+                    }
                 }
-                return false;      // << freeze as long as p keeps staring
             }
         }
         if (!bl2 && bl) {
@@ -568,7 +575,7 @@ public class Creaking extends Monster {
         HOME_POS = SynchedEntityData.defineId(Creaking.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
     }
 
-    public boolean isLookingAtMe(Player player, double d, boolean bl, double... ds) {
+    public boolean isLookingAtMe(Entity player, double d, boolean bl, double... ds) {
         Vec3 vec3 = player.getViewVector(1.0F).normalize();
 
         for(double e : ds) {
@@ -576,7 +583,7 @@ public class Creaking extends Monster {
             double f = vec32.length();
             vec32 = vec32.normalize();
             double g = vec3.dot(vec32);
-            if (g > (double)1.0F - d / (bl ? f : (double)1.0F) && hasLineOfSight(player, this)) {
+            if (g > (double)1.0F - d / (bl ? f : (double)1.0F) && hasLineOfSight((Player) player, this)) {
                 return true;
             }
         }

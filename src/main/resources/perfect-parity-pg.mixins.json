@@ -2,9 +2,11 @@
   "required": true,
   "package": "com.perfectparitypg.mixin",
   "compatibilityLevel": "JAVA_21",
+  "plugin": "com.perfectparitypg.mixin.MixinLoadPlugin",
   "mixins": [
     "BushBlockMixin",
     "FlowerPotMixin",
+    "PackOverlayMixin",
     "TreeDecoratorTypeInvoker"
   ],
   "injectors": {

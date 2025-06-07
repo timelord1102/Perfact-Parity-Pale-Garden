@@ -132,6 +132,7 @@ public class ModModelProvider extends FabricModelProvider {
         // trimMaterials.add(materialName);
 
         for (String material : armor_materials) {
+            if (material.equals("gold")) material = "golden";
             for (String type: armorTypes) {
                 ResourceLocation armorLocation = ResourceLocation.withDefaultNamespace("item/" + material + "_" + type);
                 JsonObject json = new JsonObject();

@@ -1,5 +1,6 @@
 package com.perfectparitypg;
 
+import com.perfectparitypg.config.Config;
 import com.perfectparitypg.entity.ModEntities;
 import com.perfectparitypg.particle.ModParticles;
 import com.perfectparitypg.sound.ModSounds;
@@ -25,6 +26,7 @@ public class PerfectParityPG implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Config CONFIG = new Config("perfect-parity-pg");
 
 	@Override
 	public void onInitialize() {
@@ -49,7 +51,5 @@ public class PerfectParityPG implements ModInitializer {
 		StrippableBlockRegistry.register(ModBlocks.PALE_OAK_WOOD, ModBlocks.STRIPPED_PALE_OAK_WOOD);
 
 		LOGGER.info("1.21.4 Features Added!");
-
-
 	}
 }
