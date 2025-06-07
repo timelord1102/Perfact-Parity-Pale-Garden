@@ -7,6 +7,7 @@ public class Config {
 
     public Config (String name) {
         setUpConfig(name);
+        readConfig();
     }
 
     public void setUpConfig (String name) {
@@ -14,7 +15,7 @@ public class Config {
         if (!YAML_PARSER.WRITTEN) return;
         YAML_PARSER.addComment("Utility settings\n");
         YAML_PARSER.addComment("Some resource packs require a matching pack format for overlays, normally if they support multiple versions");
-        YAML_PARSER.addBooleanWithComment("use_1_21_4_resource_pack_format", "default: false", false);
+        YAML_PARSER.addBooleanWithComment("load_1_21_4_overlay_directories", "default: false", false);
     }
 
     public void readConfig () {

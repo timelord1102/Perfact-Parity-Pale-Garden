@@ -129,7 +129,6 @@ public class ModModelProvider extends FabricModelProvider {
     public static void generateTrimModels (ItemModelGenerators itemModelGenerators, String materialName, float id) {
         List<String> armorTypes = List.of("helmet", "boots", "chestplate", "leggings");
         List<String> trimMaterials = new ArrayList<>(trim_materials.stream().toList());
-        // trimMaterials.add(materialName);
 
         for (String material : armor_materials) {
             if (material.equals("gold")) material = "golden";
@@ -141,7 +140,7 @@ public class ModModelProvider extends FabricModelProvider {
                 BigDecimal baseId = new BigDecimal("0.1");
                 for (String trim : trimMaterials) {
                     JsonObject model = new JsonObject();
-                    if (material.equals(trim)) {
+                    if (material.contains(trim)) {
                         trim = trim+"_darker";
                     }
 

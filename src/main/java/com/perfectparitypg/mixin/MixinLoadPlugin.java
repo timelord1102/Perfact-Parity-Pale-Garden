@@ -12,7 +12,6 @@ public class MixinLoadPlugin implements IMixinConfigPlugin {
 
     @Override
     public void onLoad(String mixinPackage) {
-        PerfectParityPG.CONFIG.readConfig();
     }
 
     @Override
