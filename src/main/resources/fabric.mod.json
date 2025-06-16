@@ -39,6 +39,6 @@
 		"terrablender": "*"
 	},
 	"suggests": {
-		"continuity": "*"
+		"moremcmeta_emissive_plugin": "*"
 	}
 }
