@@ -1,0 +1,6 @@
+{
+    "overlay": {
+        "texture": "minecraft:textures/block/open_eyeblossom_emissive.png",
+        "emissive": true
+    }
+}
