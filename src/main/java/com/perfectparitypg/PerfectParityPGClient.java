@@ -21,10 +21,22 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.biome.Biome;
 
+// For Resource Packs
+import net.minecraft.network.chat.Component;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resources.ResourceLocation;
+
 public class PerfectParityPGClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-
+        FabricLoader.getInstance()
+                    .getModContainer("perfect-parity-pg")
+                    .ifPresent(modContainer -> {
+                        ResourceLocation packId = ResourceLocation.fromNamespaceAndPath("perfect-parity-pg", "emissive_eyeblossom");
+                        ResourceManagerHelper.registerBuiltinResourcePack(packId, modContainer, Component.nullToEmpty("Emissive Eyblossom Add-On"), ResourcePackActivationType.DEFAULT_ENABLED);
+                    });
         ModEntityRenderer.registerEntityRenderers();
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.RESIN_CLUMP, ModBlocks.POTTED_PALE_OAK_SAPLING,
