@@ -40,6 +40,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(PALE_OAK_LOGS).add(ModBlocks.PALE_OAK_LOG, ModBlocks.STRIPPED_PALE_OAK_LOG,
                 ModBlocks.PALE_OAK_WOOD, ModBlocks.STRIPPED_PALE_OAK_WOOD);
         getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).addTag(PALE_OAK_LOGS);
+        getOrCreateTagBuilder(BlockTags.LOGS).addTag(PALE_OAK_LOGS);
 
         getOrCreateTagBuilder(BlockTags.LEAVES).add(ModBlocks.PALE_OAK_LEAVES);
         getOrCreateTagBuilder(BlockTags.SAPLINGS).add(ModBlocks.PALE_OAK_SAPLING);
