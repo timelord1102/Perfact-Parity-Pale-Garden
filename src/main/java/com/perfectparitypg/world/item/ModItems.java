@@ -122,6 +122,9 @@ public class ModItems {
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.OPEN_EYEBLOSSOM, 0.3f);
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_MOSS_BLOCK, 0.65f);
         CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_MOSS_BLOCK, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_HANGING_MOSS, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_MOSS_CARPET, 0.3f);
+        CompostingChanceRegistry.INSTANCE.add(ModBlocks.PALE_OAK_LEAVES, 0.3f);
     }
 
 }
