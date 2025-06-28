@@ -19,7 +19,10 @@ repositories {
 		name = "CurseMaven"
 		url = "https://cursemaven.com"
 	}
-
+	maven {
+		name = "Architectury"
+		url = 'https://maven.architectury.dev/'
+	}
 	maven {
 		url = uri('https://maven.minecraftforge.net/')
 	}
@@ -54,6 +57,9 @@ dependencies {
 	modLocalRuntime("curse.maven:continuity-531351:5962880")
 
 	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.minecraft_version}-4.1.0.8"
+
+	// Optional: MoonlightLib for Every Compat integration
+	modCompileOnly "curse.maven:selene-499980:6695556"
 }
 
 processResources {
