@@ -60,6 +60,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Creaking extends Monster {
+    private net.minecraft.world.damagesource.DamageSource lastDamageSource;
     private static final EntityDataAccessor<Boolean> CAN_MOVE;
     private static final EntityDataAccessor<Boolean> IS_ACTIVE;
     private static final EntityDataAccessor<Boolean> IS_TEARING_DOWN;
@@ -154,6 +155,7 @@ public class Creaking extends Monster {
 
     @Override
     public boolean hurt(DamageSource damageSource, float f) {
+        this.lastDamageSource = damageSource;
         BlockPos blockPos = this.getHomePos();
         if (blockPos != null && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (this.invulnerabilityAnimationRemainingTicks <= 0 && !this.isDeadOrDying()) {
@@ -476,8 +478,11 @@ public class Creaking extends Monster {
 
     @Override
     public void knockback(double d, double e, double f) {
-        if (this.canMove()) {
-            super.knockback(d, e, f);
+        if (this.canMove() && this.lastDamageSource != null) {
+            if (this.lastDamageSource.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION) || "wind_charge".equals(this.lastDamageSource.getMsgId())) {
+                super.knockback(d, e, f);
+            }
+            // else: ignore knockback from attacks and other sources
         }
     }
 
