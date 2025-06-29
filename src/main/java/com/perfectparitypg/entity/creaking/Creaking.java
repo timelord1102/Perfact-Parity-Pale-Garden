@@ -98,7 +98,6 @@ public class Creaking extends Monster {
         groundPathNavigation.setCanFloat(true);
         this.xpReward = 0;
         this.nextFlickerTime = 0;
-        this.setInvulnerable(true);
     }
 
     public void setTransient(BlockPos blockPos) {
@@ -159,7 +158,11 @@ public class Creaking extends Monster {
         BlockPos blockPos = this.getHomePos();
         if (blockPos != null && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             if (this.invulnerabilityAnimationRemainingTicks <= 0 && !this.isDeadOrDying()) {
-                Player player = this.blameSourceForDamage(damageSource);
+                Entity attacker = damageSource.getEntity();
+                if (attacker instanceof LivingEntity) {
+                    this.setLastHurtByMob((LivingEntity)attacker);
+                }
+                Player player = this.resolvePlayerResponsibleForDamage(damageSource);
                 Entity entity = damageSource.getDirectEntity();
                 if (!(entity instanceof LivingEntity) && !(entity instanceof Projectile) && player == null) {
                     return false;
@@ -326,7 +329,7 @@ public class Creaking extends Monster {
     }
 
     public void creakingDeathEffects(DamageSource damageSource) {
-        this.blameSourceForDamage(damageSource);
+        this.resolvePlayerResponsibleForDamage(damageSource);
         // this.die(damageSource);
         this.makeSound(ModSounds.CREAKING_TWITCH);
     }
@@ -605,21 +608,6 @@ public class Creaking extends Monster {
                     .clip(new ClipContext(vec3, vec31, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player))
                     .getType() == HitResult.Type.MISS) && !player.isCreative();
         }
-    }
-
-    public Player blameSourceForDamage(DamageSource damageSource) {
-        this.resolveMobResponsibleForDamage(damageSource);
-        return this.resolvePlayerResponsibleForDamage(damageSource);
-    }
-
-    protected void resolveMobResponsibleForDamage(DamageSource damageSource) {
-        Entity var3 = damageSource.getEntity();
-        if (var3 instanceof LivingEntity livingEntity) {
-            if (!damageSource.is(DamageTypeTags.NO_ANGER) && (!damageSource.is(DamageTypes.WIND_CHARGE) || !this.getType().is(EntityTypeTags.NO_ANGER_FROM_WIND_CHARGE))) {
-                this.setLastHurtByMob(livingEntity);
-            }
-        }
-
     }
 
     @Nullable
