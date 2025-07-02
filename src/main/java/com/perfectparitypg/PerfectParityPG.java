@@ -15,6 +15,7 @@ import com.perfectparitypg.worldgen.ModVegetationFeatures;
 import com.perfectparitypg.worldgen.PaleOakTreeGrower;
 import net.fabricmc.api.ModInitializer;
 import com.perfectparitypg.event.MobEvents;
+import com.perfectparitypg.event.WanderingTraderTrades;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public class PerfectParityPG implements ModInitializer {
 		// Proceed with mild caution.
 
 		MobEvents.register();
+		WanderingTraderTrades.register();
 		ModBlocks.initialize();
 		ModItems.initialize();
 		ModSounds.registerSounds();
